@@ -5,5 +5,5 @@ parameters:
         - src
         - tests
     ignoreErrors:
+        - identifier: missingType.generics
         - message: '/no value type specified in iterable/'
-    checkGenericClassInNonGenericObjectType: false

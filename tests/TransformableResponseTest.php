@@ -111,8 +111,8 @@ class TransformableResponseTest extends TestCase
         $this->realized_response->$method(...$args)->willReturn($mutated_response);
 
         // make should only be called once
-        self::assertSame($mutated_response, $sut->$method(...$args));
-        self::assertSame($mutated_response, $sut->$method(...$args));
+        self::assertSame($mutated_response, $sut->$method(...$args)->getWrapped());
+        self::assertSame($mutated_response, $sut->$method(...$args)->getWrapped());
     }
 
     #[Test]

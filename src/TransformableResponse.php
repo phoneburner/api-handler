@@ -11,11 +11,24 @@ class TransformableResponse implements ResponseInterface
 {
     use ResponseWrapper;
 
-    public function __construct(
+    final public function __construct(
         public readonly TransformableResource $transformable_resource,
         private readonly ResponseFactory $response_factory,
         private readonly int $status = 200,
     ) {
+        $this->setWrappedFactory(fn(): ResponseInterface => $this->response_factory->make($this->transformable_resource, $this->status));
+    }
+
+    protected function wrap(ResponseInterface $response): static
+    {
+        $new = new static(
+            $this->transformable_resource,
+            $this->response_factory,
+            $this->status,
+        );
+
+        $new->setWrapped($response);
+        return $new;
     }
 
     public function withTransformableResource(TransformableResource $transformable_resource): self
@@ -34,10 +47,5 @@ class TransformableResponse implements ResponseInterface
         }
 
         return $this->status;
-    }
-
-    private function getWrapped(): ResponseInterface
-    {
-        return $this->wrapped ??= $this->response_factory->make($this->transformable_resource, $this->status);
     }
 }

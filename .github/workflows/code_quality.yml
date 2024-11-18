@@ -25,7 +25,7 @@ jobs:
       - name: Install Composer Dependencies
         uses: ramsey/composer-install@v2
       - name: Run PHP_CodeSniffer
-        run: vendor/bin/phpcs
+        run: vendor/bin/phpcs --no-cache
 
   rector:
     name: Rector

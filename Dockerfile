@@ -9,7 +9,7 @@ RUN <<-EOF
   apt-get update;
   apt-get install -y git libzip-dev unzip;
   apt-get clean;
-  pecl install xdebug;
+  MAKEFLAGS="-j $(nproc)" pecl install xdebug;
   docker-php-ext-enable xdebug;
   mkdir -p "/home/dev/.composer";
   chown -R "dev:dev" "/home/dev/.composer";
