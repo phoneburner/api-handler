@@ -1,83 +1,20 @@
-name: Code Quality
+name: Code Quality Checks
 
 on:
   push:
-    branches:
-      - master
-      - develop
   pull_request:
-    branches:
-      - master
-      - develop
+    branches: [main]
 
 jobs:
-  phpcs:
-    name: PHP_CodeSniffer
+  ci:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-      - name: Install PHP and Extensions
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.3
-          tools: composer:v2
-      - name: Install Composer Dependencies
-        uses: ramsey/composer-install@v2
-      - name: Run PHP_CodeSniffer
-        run: vendor/bin/phpcs --no-cache
 
-  rector:
-    name: Rector
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-      - name: Install PHP and Extensions
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.3
-          tools: composer:v2
-      - name: Install Composer Dependencies
-        uses: ramsey/composer-install@v2
-      - name: Run Rector
-        run: vendor/bin/rector process --dry-run --no-progress-bar
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  phpstan:
-    name: PHPStan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-      - name: Install PHP and Extensions
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.3
-          tools: composer:v2
-      - name: Install Composer Dependencies
-        uses: ramsey/composer-install@v2
-      - name: Run PHPStan
-        run: vendor/bin/phpstan --no-progress --no-ansi
-
-  phpunit:
-    name: PHPUnit (PHP ${{ matrix.php }} - ${{ matrix.dependency-versions }})
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php: [ '8.2', '8.3' ]
-        dependency-versions: [ 'locked', 'highest', 'lowest' ]
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-      - name: Install PHP and Extensions
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          coverage: xdebug
-          tools: composer:v2
-      - name: Install Composer Dependencies
-        uses: ramsey/composer-install@v2
-        with:
-          dependency-versions: ${{ matrix.dependency-versions }}
-      - name: Run PHPUnit
-        run: vendor/bin/phpunit --no-progress --coverage-text
+      - name: Run Code Quality Checks
+        run: |
+          cp .env.dist .env;
+          sed -i "s/^GITHUB_TOKEN=.*/GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}/" ".env";
+          make -j && make ci;

@@ -8,5 +8,5 @@ use Psr\Http\Message\ResponseInterface;
 
 interface ResponseFactory
 {
-    public function make(?TransformableResource $resource = null, int $code = 200): ResponseInterface;
+    public function make(TransformableResource|null $resource = null, int $code = 200): ResponseInterface;
 }

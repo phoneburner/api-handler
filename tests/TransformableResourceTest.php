@@ -11,12 +11,12 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Http\Message\ServerRequestInterface;
 
-class TransformableResourceTest extends TestCase
+final class TransformableResourceTest extends TestCase
 {
     use ProphecyTrait;
 
     #[Test]
-    public function getContent_transforms_resource(): void
+    public function getContentTransformsResource(): void
     {
         $resource = new \stdClass();
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();
@@ -31,7 +31,7 @@ class TransformableResourceTest extends TestCase
     }
 
     #[Test]
-    public function is_value_object(): void
+    public function isValueObject(): void
     {
         $resource = new \stdClass();
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();

@@ -18,7 +18,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 
-class TransformableResponseTest extends TestCase
+final class TransformableResponseTest extends TestCase
 {
     use ProphecyTrait;
 
@@ -54,7 +54,7 @@ class TransformableResponseTest extends TestCase
     }
 
     #[Test]
-    public function transformable_resource_is_accessible(): void
+    public function transformableResourceIsAccessible(): void
     {
         $sut = new TransformableResponse(
             $this->transformable_resource,
@@ -64,7 +64,7 @@ class TransformableResponseTest extends TestCase
     }
 
     #[Test]
-    public function withTransformableResource_replaces_TransformableResource(): void
+    public function withTransformableResourceReplacesTransformableResource(): void
     {
         $resource = new \stdClass();
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();
@@ -97,7 +97,7 @@ class TransformableResponseTest extends TestCase
 
     #[Test]
     #[DataProvider('provideWithMethods')]
-    public function withMethods_realize_Response_once_and_return(string $method, array $args): void
+    public function withMethodsRealizeResponseOnceAndReturn(string $method, array $args): void
     {
         $this->factory->make($this->transformable_resource, 200)->shouldBeCalledOnce();
 
@@ -108,16 +108,19 @@ class TransformableResponseTest extends TestCase
 
         $mutated_response = $this->prophesize(ResponseInterface::class)->reveal();
 
+        /** @phpstan-ignore method.nonObject */
         $this->realized_response->$method(...$args)->willReturn($mutated_response);
 
         // make should only be called once
+        /** @phpstan-ignore method.nonObject */
         self::assertSame($mutated_response, $sut->$method(...$args)->getWrapped());
+        /** @phpstan-ignore method.nonObject */
         self::assertSame($mutated_response, $sut->$method(...$args)->getWrapped());
     }
 
     #[Test]
     #[DataProvider('provideGetMethods')]
-    public function getMethods_realize_Response_once_and_pass_response(string $method, array $args, mixed $return): void
+    public function getMethodsRealizeResponseOnceAndPassResponse(string $method, array $args, mixed $return): void
     {
         $this->factory->make($this->transformable_resource, 200)->shouldBeCalledOnce();
 
@@ -126,6 +129,7 @@ class TransformableResponseTest extends TestCase
             $this->factory->reveal(),
         );
 
+        /** @phpstan-ignore method.nonObject */
         $this->realized_response->$method(...$args)->willReturn($return);
 
         // make should only be called once
@@ -134,7 +138,7 @@ class TransformableResponseTest extends TestCase
     }
 
     #[Test]
-    public function getStatusCode_does_not_realize_Response(): void
+    public function getStatusCodeDoesNotRealizeResponse(): void
     {
         $this->factory->make(Argument::cetera(), 200)
             ->shouldNotBeCalled();

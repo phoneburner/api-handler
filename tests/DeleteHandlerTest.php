@@ -18,7 +18,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use stdClass;
 
-class DeleteHandlerTest extends TestCase
+final class DeleteHandlerTest extends TestCase
 {
     use ProphecyTrait;
 
@@ -60,7 +60,7 @@ class DeleteHandlerTest extends TestCase
     }
 
     #[Test]
-    public function handle_resolves_resource_and_returns_deleted_resource(): void
+    public function handleResolvesResourceAndReturnsDeletedResource(): void
     {
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();
         $resource = new stdClass();
@@ -79,7 +79,7 @@ class DeleteHandlerTest extends TestCase
     }
 
     #[Test]
-    public function handle_resolves_resource_and_returns_empty_response(): void
+    public function handleResolvesResourceAndReturnsEmptyResponse(): void
     {
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();
         $resource = new stdClass();

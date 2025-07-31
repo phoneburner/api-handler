@@ -14,32 +14,32 @@ your bug report._
 When submitting a bug report, please include enough information to reproduce the
 bug. A good bug report includes the following sections:
 
-* **Description**
+- **Description**
 
-  Provide a short and clear description of the bug.
+    Provide a short and clear description of the bug.
 
-* **Steps to reproduce**
+- **Steps to reproduce**
 
-  Provide steps to reproduce the behavior you are experiencing. Please try to
-  keep this as short as possible. If able, create a reproducible script outside
-  of any framework you are using. This will help us to quickly debug the issue.
+    Provide steps to reproduce the behavior you are experiencing. Please try to
+    keep this as short as possible. If able, create a reproducible script outside
+    of any framework you are using. This will help us to quickly debug the issue.
 
-* **Expected behavior**
+- **Expected behavior**
 
-  Provide a short and clear description of what you expect to happen.
+    Provide a short and clear description of what you expect to happen.
 
-* **Screenshots or output**
+- **Screenshots or output**
 
-  If applicable, add screenshots or program output to help explain your problem.
+    If applicable, add screenshots or program output to help explain your problem.
 
-* **Environment details**
+- **Environment details**
 
-  Provide details about the system where you're using this package, such as PHP
-  version and operating system.
+    Provide details about the system where you're using this package, such as PHP
+    version and operating system.
 
-* **Additional context**
+- **Additional context**
 
-  Provide any additional context that may help us debug the problem.
+    Provide any additional context that may help us debug the problem.
 
 ## Fixing Bugs
 
@@ -60,20 +60,20 @@ your hard work, but some features don't fit with the goals of the project.
 
 When you do begin working on your feature, here are some guidelines to consider:
 
-* Your pull request description should clearly detail the changes you have made.
+- Your pull request description should clearly detail the changes you have made.
   We will use this description to update the CHANGELOG. If there is no
   description, or it does not adequately describe your feature, we may ask you
   to update the description.
-* `phoneburner/api-handler` follows a superset of **[PSR-12 coding standard][psr-12]**, and all pull requests must
+- `phoneburner/api-handler` follows a superset of **[PSR-12 coding standard][psr-12]**, and all pull requests must
   comply with the coding standard
   Please ensure your code does, too. _Hint: run `make phpcs` to check._
-* Please **write tests** for any new features you add.
-* Please **ensure that tests pass** before submitting your pull request.
+- Please **write tests** for any new features you add.
+- Please **ensure that tests pass** before submitting your pull request.
   `phoneburner/api-handler` automatically runs tests for pull requests. However,
   running the tests locally will help save time. _Hint: run `make phpunit`._
-* **Use topic/feature branches.** Please do not ask to pull from your main branch.
-    * For more information, see "[Understanding the GitHub flow][gh-flow]."
-* **Submit one feature per pull request.** If you have multiple features you
+- **Use topic/feature branches.** Please do not ask to pull from your main branch.
+    - For more information, see "[Understanding the GitHub flow][gh-flow]."
+- **Submit one feature per pull request.** If you have multiple features you
   wish to submit, please break them into separate pull requests.
 
 ## Developing
@@ -86,7 +86,7 @@ is used externally from the host environment to run most of the common scripts.
 
 After cloning this repository locally, execute the following commands:
 
-``` bash
+```bash
 cd /path/to/repository
 make
 ```
@@ -103,7 +103,7 @@ This project uses [PHPStan](https://github.com/phpstan/phpstan) to provide stati
 code. You may run static analysis manually across the whole codebase with the
 following command:
 
-``` bash
+```bash
 # Static analysis
 make phpstan
 ```
@@ -114,7 +114,7 @@ This project follows a superset of [PSR-12](https://www.php-fig.org/psr/psr-12/)
 coding standards, enforced by [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer).
 Rector is also used to enforce code quality and standards
 
-``` bash
+```bash
 # Run the code standards linter
 make phpcs
 
@@ -139,11 +139,7 @@ make phpunit
 ```
 
 [github]: https://github.com/PhoneBurnerOpenSource/api-handler
-
 [issues]: https://github.com/PhoneBurnerOpenSource/api-handler/issues
-
 [pull requests]: https://github.com/PhoneBurnerOpenSource/api-handler/pulls
-
 [psr-12]: https://www.php-fig.org/psr/psr-12/
-
 [gh-flow]: https://guides.github.com/introduction/flow/

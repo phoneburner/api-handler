@@ -17,7 +17,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use stdClass;
 
-class ReadHandlerTest extends TestCase
+final class ReadHandlerTest extends TestCase
 {
     use ProphecyTrait;
 
@@ -52,7 +52,7 @@ class ReadHandlerTest extends TestCase
     }
 
     #[Test]
-    public function handle_resolves_resource_and_returns_resource(): void
+    public function handleResolvesResourceAndReturnsResource(): void
     {
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();
         $resource = new stdClass();

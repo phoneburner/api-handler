@@ -14,7 +14,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class DispatchMiddlewareTest extends TestCase
+final class DispatchMiddlewareTest extends TestCase
 {
     use ProphecyTrait;
 
@@ -32,7 +32,7 @@ class DispatchMiddlewareTest extends TestCase
     }
 
     #[Test]
-    public function process_passes_if_factory_cannot_handle(): void
+    public function processPassesIfFactoryCannotHandle(): void
     {
         $request = $this->prophesize(ServerRequestInterface::class);
         $this->factory->canHandle($request->reveal())->willReturn(false);
@@ -46,7 +46,7 @@ class DispatchMiddlewareTest extends TestCase
     }
 
     #[Test]
-    public function process_creates_handler_and_calls(): void
+    public function processCreatesHandlerAndCalls(): void
     {
         $request = $this->prophesize(ServerRequestInterface::class);
         $this->factory->canHandle($request->reveal())->willReturn(true);

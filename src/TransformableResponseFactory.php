@@ -13,7 +13,7 @@ class TransformableResponseFactory implements ResponseFactory
     ) {
     }
 
-    public function make(?TransformableResource $resource = null, int $code = 200): ResponseInterface
+    public function make(TransformableResource|null $resource = null, int $code = 200): ResponseInterface
     {
         if ($resource === null) {
             return $this->realizing_factory->make(null, $code);

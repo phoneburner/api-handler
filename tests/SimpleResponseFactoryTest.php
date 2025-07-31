@@ -19,7 +19,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 
-class SimpleResponseFactoryTest extends TestCase
+final class SimpleResponseFactoryTest extends TestCase
 {
     use ProphecyTrait;
 
@@ -50,7 +50,7 @@ class SimpleResponseFactoryTest extends TestCase
     #[TestWith([200])]
     #[TestWith([201])]
     #[TestWith([202])]
-    public function make_allows_varied_status_codes(int $status): void
+    public function makeAllowsVariedStatusCodes(int $status): void
     {
         $resource = new \stdClass();
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();
@@ -79,7 +79,7 @@ class SimpleResponseFactoryTest extends TestCase
     #[TestWith([200])]
     #[TestWith([201])]
     #[TestWith([202])]
-    public function make_allows_null_TransformableResource(int $status): void
+    public function makeAllowsNullTransformableResource(int $status): void
     {
         $response = $this->prophesize(ResponseInterface::class);
         $this->response_factory->createResponse($status)->willReturn($response->reveal());
@@ -92,7 +92,7 @@ class SimpleResponseFactoryTest extends TestCase
 
     #[Test]
     #[DataProvider('provideReturns')]
-    public function make_returns_response_with_expected_body(mixed $value, string $content): void
+    public function makeReturnsResponseWithExpectedBody(mixed $value, string $content): void
     {
         $resource = new \stdClass();
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();
@@ -118,7 +118,7 @@ class SimpleResponseFactoryTest extends TestCase
     }
 
     #[Test]
-    public function make_allows_null(): void
+    public function makeAllowsNull(): void
     {
         $resource = new \stdClass();
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();
@@ -138,7 +138,7 @@ class SimpleResponseFactoryTest extends TestCase
     }
 
     #[Test]
-    public function make_allows_resource(): void
+    public function makeAllowsResource(): void
     {
         $resource = new \stdClass();
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();

@@ -1,107 +1,123 @@
 {
-    "name": "phoneburner/api-handler",
-    "description": "Simple set of handlers to add an API to any project.",
-    "type": "library",
-    "license": "MIT",
-    "keywords": [
-        "api",
-        "psr",
-        "psr-7",
-        "psr-15",
-        "http",
-        "http-message",
-        "request",
-        "response"
-    ],
-    "authors": [
-        {
-            "name": "Aaron Barczewski",
-            "email": "aaronb@phoneburner.com"
-        },
-        {
-            "name": "Andy Snell",
-            "email": "andy@phoneburner.com"
-        },
-        {
-            "name": "Conor Hooley",
-            "email": "conorh@phoneburner.com"
-        },
-        {
-            "name": "John Boctor",
-            "email": "johnb@phoneburner.com"
-        },
-        {
-            "name": "John Congdon",
-            "email": "jcongdon@phoneburner.com"
-        },
-        {
-            "name": "Joseph Lavin",
-            "email": "joseph@phoneburner.com"
-        },
-        {
-            "name": "Josh Osenbaugh",
-            "email": "josho@phoneburner.com"
-        },
-        {
-            "name": "Phil Tadeo",
-            "email": "phil@phoneburner.com"
-        },
-        {
-            "name": "Josh Osenbaugh",
-            "email": "josho@phoneburner.com"
-        },
-        {
-            "name": "Tim Lytle",
-            "email": "tim@phoneburner.com"
-        }
-    ],
-    "minimum-stability": "RC",
-    "config": {
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "phpstan/extension-installer": true
-        },
-        "sort-packages": true
+  "name": "phoneburner/api-handler",
+  "description": "Simple set of handlers to add an API to any project.",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "api",
+    "psr",
+    "psr-7",
+    "psr-15",
+    "http",
+    "http-message",
+    "request",
+    "response"
+  ],
+  "authors": [
+    {
+      "name": "Andy Snell",
+      "email": "andy@phoneburner.com"
     },
-    "require": {
-        "php": "~8.2.0 || ~8.3.0 || ~8.4.0",
-        "phoneburner/http-tortilla": "dev-develop",
-        "psr/http-factory": "^1.0",
-        "psr/http-message": "^2.0",
-        "psr/http-server-middleware": "^1.0"
+    {
+      "name": "Conor Hooley",
+      "email": "conorh@phoneburner.com"
     },
-    "require-dev": {
-        "jangregor/phpstan-prophecy": "^1.0.2",
-        "phpspec/prophecy-phpunit": "^2.2",
-        "phpstan/extension-installer": "^1.4.3",
-        "phpstan/phpstan": "^1.12.11",
-        "phpstan/phpstan-phpunit": "^1.4.1",
-        "phpunit/phpunit": "^11.4.3",
-        "rector/rector": "^1.2.10",
-        "slevomat/coding-standard": "^8.15",
-        "squizlabs/php_codesniffer": "^3.11.1"
+    {
+      "name": "John Boctor",
+      "email": "johnb@phoneburner.com"
     },
-    "autoload": {
-        "psr-4": {
-            "PhoneBurner\\ApiHandler\\": "src/"
-        }
+    {
+      "name": "John Congdon",
+      "email": "jcongdon@phoneburner.com"
     },
-    "autoload-dev": {
-        "psr-4": {
-            "PhoneBurner\\Tests\\ApiHandler\\": "tests/"
-        }
+    {
+      "name": "Joseph Lavin",
+      "email": "joseph@phoneburner.com"
     },
-    "scripts": {
-        "phpcbf": "@php vendor/bin/phpcbf --report=full",
-        "phpcs": "@php vendor/bin/phpcs --report=full",
-        "phpstan": "@php vendor/bin/phpstan analyze --memory-limit=-1",
-        "phpunit": "@php -d xdebug.mode=coverage vendor/bin/phpunit --coverage-text",
-        "rector": "@php vendor/bin/rector process",
-        "ci": [
-            "@phpcs",
-            "@phpunit",
-            "@phpstan",
-            "@php vendor/bin/rector process --dry-run"
-        ]
+    {
+      "name": "Josh Osenbaugh",
+      "email": "josho@phoneburner.com"
+    },
+    {
+      "name": "Phil Tadeo",
+      "email": "phil@phoneburner.com"
+    },
+    {
+      "name": "Josh Osenbaugh",
+      "email": "josho@phoneburner.com"
+    },
+    {
+      "name": "Tim Lytle",
+      "email": "tim@phoneburner.com"
     }
+  ],
+  "require": {
+    "php": "~8.2.0 || ~8.3.0 || ~8.4.0",
+    "phoneburner/http-tortilla": "^2.0.0",
+    "psr/http-factory": "^1.0",
+    "psr/http-message": "^2.0",
+    "psr/http-server-middleware": "^1.0"
+  },
+  "require-dev": {
+    "jangregor/phpstan-prophecy": "^2.2.0",
+    "phoneburner/coding-standard": "^1.0",
+    "php-parallel-lint/php-parallel-lint": "^1.4",
+    "phpspec/prophecy-phpunit": "^2.4",
+    "phpstan/extension-installer": "^1.4",
+    "phpstan/phpstan": "^2.1",
+    "phpstan/phpstan-phpunit": "^2.0",
+    "phpunit/phpunit": "^12.2",
+    "rector/rector": "^2.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "PhoneBurner\\ApiHandler\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PhoneBurner\\Tests\\ApiHandler\\": "tests/"
+    }
+  },
+  "scripts": {
+    "lint": [
+      "@putenv XDEBUG_MODE=off",
+      "@php vendor/bin/parallel-lint -j $(nproc) --show-deprecated --exclude vendor --exclude build ."
+    ],
+    "phpcbf": [
+      "@putenv XDEBUG_MODE=off",
+      "@php vendor/bin/phpcbf --parallel=$(nproc) --report=full"
+    ],
+    "phpcs": [
+      "@putenv XDEBUG_MODE=off",
+      "@php vendor/bin/phpcs --parallel=$(nproc) --report=full"
+    ],
+    "phpstan": [
+      "@putenv XDEBUG_MODE=off",
+      "@php vendor/bin/phpstan analyze --memory-limit=-1 --verbose"
+    ],
+    "phpunit": [
+      "@putenv XDEBUG_MODE=off",
+      "@php vendor/bin/phpunit"
+    ],
+    "phpunit-coverage": [
+      "@putenv XDEBUG_MODE=coverage",
+      "@php vendor/bin/phpunit --coverage-html=build/phpunit"
+    ],
+    "rector": [
+      "@putenv XDEBUG_MODE=off",
+      "@php vendor/bin/rector process"
+    ],
+    "rector-dry-run": [
+      "@putenv XDEBUG_MODE=off",
+      "@php vendor/bin/rector process --dry-run"
+    ]
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "phpstan/extension-installer": true
+    },
+    "sort-packages": true
+  }
 }

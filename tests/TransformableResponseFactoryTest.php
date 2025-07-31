@@ -15,14 +15,14 @@ use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class TransformableResponseFactoryTest extends TestCase
+final class TransformableResponseFactoryTest extends TestCase
 {
     use ProphecyTrait;
 
     #[Test]
     #[TestWith([200])]
     #[TestWith([201])]
-    public function make_returns_TransformableResponse_configured_with_realizing_factory(int $status): void
+    public function makeReturnsTransformableResponseConfiguredWithRealizingFactory(int $status): void
     {
         $resource = new \stdClass();
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();
@@ -51,7 +51,7 @@ class TransformableResponseFactoryTest extends TestCase
     }
 
     #[Test]
-    public function make_returns_empty_response_without_TransformableResponse(): void
+    public function makeReturnsEmptyResponseWithoutTransformableResponse(): void
     {
         $response = $this->prophesize(ResponseInterface::class);
         $realizing_factory = $this->prophesize(ResponseFactory::class);

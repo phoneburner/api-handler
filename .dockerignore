@@ -1,7 +1,56 @@
-.github
-build
+# Ignore IDE, AI, & GitHub Directories
+/.cursor
+/.idea
+/.junie
+/.phpstorm.meta.php
+/.run
+/.vscode
+
+# Ignore GitHub Actions and CI/CD Directories
+/.github
+
+# Ignore Local, Build, Test and Vendor Directories
+/.local
+/build
+/deploy
+/database/dump/
+/infrastructure
+/public/local
+/public/phpunit
+/tests
+/vendor
+*.terraform
+
+# Ignore /storage, except for ".gitignore" files to preserve directory structure
 storage
-vendor
+!storage/**/.gitignore
+
+# Ignore environment files, except for the default distribution file
+.env
+.env.*
+*.private.env.json
+!.env.dist
+
+# Ignore boilerplate and development tooling files
+*.http
+.editorconfig
+.gitattributes
+.gitignore
+.prettierignore
+Dockerfile
+Makefile
+README.md
+behat.yml
 docker-compose.override.yml
-phpunit.xml
+docker-compose.yml
+http-client.env.json
+phpcs.xml
+phpstan-baseline.*.neon
+phpstan-baseline.*.php
+phpstan-baseline.neon
+phpstan-baseline.php
+phpstan.dist.neon
 phpstan.neon
+phpunit.dist.xml
+phpunit.xml
+rector.php

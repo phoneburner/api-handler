@@ -18,7 +18,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use stdClass;
 
-class UpdateHandlerTest extends TestCase
+final class UpdateHandlerTest extends TestCase
 {
     use ProphecyTrait;
 
@@ -60,7 +60,7 @@ class UpdateHandlerTest extends TestCase
     }
 
     #[Test]
-    public function handle_resolves_resource_and_returns_updated_resource(): void
+    public function handleResolvesResourceAndReturnsUpdatedResource(): void
     {
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();
         $resource = new stdClass();
@@ -79,7 +79,7 @@ class UpdateHandlerTest extends TestCase
     }
 
     #[Test]
-    public function handle_resolves_resource_and_allows_null_updated_resource(): void
+    public function handleResolvesResourceAndAllowsNullUpdatedResource(): void
     {
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();
         $resource = new stdClass();
