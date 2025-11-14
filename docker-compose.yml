@@ -4,6 +4,9 @@ services:
       context: ./
       dockerfile: Dockerfile
       target: php
+      args:
+        PHP_VERSION: ${PHP_VERSION:-8.4-cli}
+        WITH_XDEBUG: ${WITH_XDEBUG:-false}
     platform: linux/amd64
     volumes:
       - ${SOURCE_DIR:-./}:/app

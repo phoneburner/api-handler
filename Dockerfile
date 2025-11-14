@@ -3,7 +3,9 @@
 # PHP Build Stages
 ##------------------------------------------------------------------------------
 
-FROM php:8.4-cli AS php
+ARG PHP_VERSION=8.4-cli
+FROM php:${PHP_VERSION} AS php
+ARG WITH_XDEBUG=false
 ARG USER_UID=1000
 ARG USER_GID=1000
 WORKDIR /app
@@ -19,16 +21,18 @@ RUN groupadd --gid $USER_GID dev \
 RUN --mount=type=cache,target=/var/lib/apt,sharing=locked apt-get update && apt-get dist-upgrade --yes
 
 RUN --mount=type=cache,target=/var/lib/apt apt-get install --yes --quiet --no-install-recommends \
+    git \
     libzip-dev \
     unzip \
   && cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-RUN <<-EOF
-  set -eux
-  export MAKEFLAGS="-j $(nproc)"
-  pecl install xdebug
-  docker-php-ext-enable xdebug
-EOF
+COPY --from=ghcr.io/php/pie:bin /pie /usr/bin/pie
+
+RUN if [ "${WITH_XDEBUG}" != "false" ]; then \
+    pie install xdebug/xdebug; \
+else \
+    echo 'Skipping Installation of the Xdebug Extension...'; \
+fi
 
 RUN <<-EOF
   set -eux

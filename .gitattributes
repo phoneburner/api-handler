@@ -25,7 +25,7 @@
 /captainhook.json           export-ignore
 /codecov.yml                export-ignore
 /compose.yaml               export-ignore
-/compose.yml               export-ignore
+/compose.yml                export-ignore
 /composer.lock              export-ignore
 /conventional-commits.json  export-ignore
 /docker-compose.yaml        export-ignore
