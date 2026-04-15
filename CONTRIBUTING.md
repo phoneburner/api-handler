@@ -111,7 +111,7 @@ make phpstan
 ### Coding Standards
 
 This project follows a superset of [PSR-12](https://www.php-fig.org/psr/psr-12/)
-coding standards, enforced by [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer).
+coding standards, enforced by [PHP_CodeSniffer](https://github.com/PHPCSStandards/PHP_CodeSniffer).
 Rector is also used to enforce code quality and standards
 
 ```bash
